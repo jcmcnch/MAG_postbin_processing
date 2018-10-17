@@ -2,19 +2,19 @@
 #Run in folder containing your bins, as follows:
 # 00-reduce-stringent.sh <file extension of bins, e.g. fa, fasta> <dataset_ID> <binner>
 
-#for fasta in `ls *$1`
-#
-#	do 
-#	
-#	docker run -v `pwd`:/runbox:rw -it lpryszcz/redundans bash -c \
-#	"cd runbox && /root/src/redundans/redundans.py -v --identity 0.95 --overlap 1.0 \
-#	-t 30 --noscaffolding --nogapclosing --minLength 100 \
-#	-f $fasta -o $(basename ${fasta} .$1)_reduced_stringent \
-#	&& chown -R 1024:1024 /runbox"
-#	
-#done
+for fasta in `ls *$1`
 
-mkdir intermediate
+	do 
+	
+	docker run -v `pwd`:/runbox:rw -it lpryszcz/redundans bash -c \
+	"cd runbox && /root/src/redundans/redundans.py -v --identity 0.95 --overlap 1.0 \
+	-t 30 --noscaffolding --nogapclosing --minLength 100 \
+	-f $fasta -o $(basename ${fasta} .$1)_reduced_stringent \
+	&& chown -R 1024:1024 /runbox"
+	
+done
+
+mkdir intermediate_redundans
 mkdir original_bins
 mkdir reduced_bins
 
@@ -23,8 +23,8 @@ for item in `find -mindepth 1 -maxdepth 1 -type d | grep reduced_stringent`
 	do
 	
 	echo cp $item/contigs.reduced.fa $2-$3-`basename $item`.fa
-	echo mv $item intermediate
+	echo mv $item intermediate_redundans
 	
 done
 
-echo mv *fai intermediate
+echo mv *fai intermediate_redundans
