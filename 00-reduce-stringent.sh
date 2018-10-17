@@ -22,7 +22,7 @@ for item in `find -mindepth 1 -maxdepth 1 -type d | grep reduced_stringent`
 	
 	do
 	
-	echo cp $item/contigs.reduced.fa $2`basename $item`.fa
+	echo cp $item/contigs.reduced.fa $2-$3-`basename $item`.fa
 	echo mv $item intermediate
 	
 done
