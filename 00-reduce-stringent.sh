@@ -25,7 +25,7 @@ for fasta in `ls *$1`
 	"cd runbox && /root/src/redundans/redundans.py -v --identity 0.95 --overlap 1.0 \
 	-t 30 --noscaffolding --nogapclosing --minLength 100 \
 	-f $fasta -o $(basename ${fasta} .$1)_reduced_stringent \
-	&& chown -R 1024:1024 /runbox"
+	&& chown -R `id -u $USER`:`id -u $USER` /runbox"
 	
 done
 
@@ -43,3 +43,5 @@ for item in `find -mindepth 1 -maxdepth 1 -type d | grep reduced_stringent`
 done
 
 mv *fai intermediate_redundans
+mv *reduced_stringent.fa reduced_bins
+mv *fa original_bins
