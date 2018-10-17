@@ -2,17 +2,17 @@
 #Run in folder containing your bins, as follows:
 # 00-reduce-stringent.sh <file extension of bins, e.g. fa, fasta> <dataset_ID> <binner>
 
-if [[ $1 -eq 0 ]] ; then
+if [[ ${#1} -eq 0 ]] ; then
     echo 'Please enter a file extension as the first argument after the script name. Example 00-reduce-stringent.sh fa sampleID binner'
     exit 0
 fi
 
-if [[ $2 -eq 0 ]] ; then
+if [[ ${#2} -eq 0 ]] ; then
     echo 'Please enter a name of your dataset as the second argument after the script name. Example 00-reduce-stringent.sh fa SPOT_2009_2014 binner'
     exit 0
 fi
 
-if [[ $3 -eq 0 ]] ; then
+if [[ ${#3} -eq 0 ]] ; then
     echo 'Please enter a the name of your binner as the third argument after the script name. Example 00-reduce-stringent.sh fa SPOT_2009_2014 binner'
     exit 0
 fi
