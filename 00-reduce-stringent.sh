@@ -21,7 +21,7 @@ for fasta in `ls *$1`
 
 	do 
 	
-	docker run -v `pwd`:/runbox:rw -it lpryszcz/redundans bash -c \
+	docker run --rm -v `pwd`:/runbox:rw -it lpryszcz/redundans bash -c \
 	"cd runbox && /root/src/redundans/redundans.py -v --identity 0.95 --overlap 1.0 \
 	-t 30 --noscaffolding --nogapclosing --minLength 100 \
 	-f $fasta -o $(basename ${fasta} .$1)_reduced_stringent \
